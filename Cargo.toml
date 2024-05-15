@@ -11,17 +11,9 @@ keywords = ["axum", "validation", "serde", "json_schema"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [dependencies]
-aide = { version = "^0.13", optional = true, features = ["axum"] }
 async-trait = "^0.1"
 axum = "^0.7"
-http-body = "^1.0"
-jsonschema = { version = "^0.18", optional = true }
-schemars = { version = "^0.8", optional = true }
-serde_valid = { version = "^0.20", features = ["flatten"] }
-tracing = "^0.1"
-serde_urlencoded = "0.7.1"
-unic-langid-impl = { version = "0.9", optional = true }
-serde_json = "^1.0"
+serde_valid = "^0.20"
 serde = "^1.0"
 
 [dev-dependencies]
@@ -29,9 +21,7 @@ hyper = "^1.0"
 mime = "0.3"
 tokio = { version = "1.24", features = ["full"] }
 tower = { version = "0.4", features = ["util"] }
+serde_json = "^1.0"
 
 [features]
 default = []
-jsonschema = ["dep:jsonschema", "dep:schemars"]
-aide = ["dep:aide", "dep:jsonschema", "dep:schemars"]
-fluent = ["serde_valid/fluent", "unic-langid-impl"]
