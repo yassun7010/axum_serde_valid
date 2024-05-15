@@ -25,28 +25,6 @@ use serde::de::DeserializeOwned;
 /// message.
 pub struct Query<T>(pub T);
 
-#[async_trait]
-impl<T, S> FromRequestParts<S> for Query<T>
-where
-    T: DeserializeOwned + serde_valid::Validate,
-    S: Send + Sync,
-{
-    type Rejection = crate::rejection::Rejection;
-
-    async fn from_request_parts(parts: &mut Parts, _state: &S) -> Result<Self, Self::Rejection> {
-        let query = parts.uri.query().unwrap_or_default();
-        match serde_urlencoded::from_str::<T>(query) {
-            Ok(v) => {
-                v.validate()
-                    .map_err(crate::rejection::Rejection::SerdeValid)?;
-
-                Ok(Query(v))
-            }
-            Err(error) => Err(crate::rejection::Rejection::SerdeUrlEncoded(error)),
-        }
-    }
-}
-
 impl<T> Deref for Query<T> {
     type Target = T;
 
@@ -61,19 +39,23 @@ impl<T> From<T> for Query<T> {
     }
 }
 
-#[cfg(feature = "aide")]
-mod impl_aide {
-    use super::*;
+#[async_trait]
+impl<T, S> FromRequestParts<S> for Query<T>
+where
+    T: DeserializeOwned + serde_valid::Validate,
+    S: Send + Sync,
+{
+    type Rejection = crate::rejection::Rejection;
 
-    impl<T> aide::OperationInput for Query<T>
-    where
-        T: schemars::JsonSchema,
-    {
-        fn operation_input(
-            ctx: &mut aide::gen::GenContext,
-            operation: &mut aide::openapi::Operation,
-        ) {
-            axum::extract::Query::<T>::operation_input(ctx, operation);
-        }
+    async fn from_request_parts(parts: &mut Parts, _state: &S) -> Result<Self, Self::Rejection> {
+        let data: T = axum::extract::Query::from_request_parts(parts, _state)
+            .await
+            .map_err(crate::rejection::Rejection::Query)?
+            .0;
+
+        data.validate()
+            .map_err(crate::rejection::Rejection::SerdeValid)?;
+
+        Ok(Query(data))
     }
 }
