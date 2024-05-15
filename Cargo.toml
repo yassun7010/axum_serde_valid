@@ -2,7 +2,7 @@
 name = "axum_serde_valid"
 description = "Axum extractor sets of JSON validation."
 edition = "2021"
-version = "0.20.0"
+version = "0.21.0"
 license = "MIT"
 repository = "https://github.com/yassun7010/axum_serde_valid.git"
 authors = ["yassun7010 <yassun7010@outlook.com>"]
