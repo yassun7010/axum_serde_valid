@@ -21,17 +21,13 @@ jsonschema  = "^0.16"
 schemars  = "0.8"
 ```
 
-### Feature Flags
-
-- `jsonschema` - provide [jsonschema](https://github.com/Stranger6667/jsonschema-rs) validation.
-- `aide` - support [aide](https://github.com/tamasfe/aide).
-
 ### Example
 
 ```rust
 use axum::{routing::post, Router};
 use axum_serde_valid::Json;
 use serde::Deserialize;
+use serde_valid::Validate;
 
 #[derive(Deserialize, Validate)]
 struct User {
@@ -39,7 +35,7 @@ struct User {
     name: String,
 }
 
-let app = Router::new().route("/json", post(|user: Json<User>| async move { "hello" }));
+let app = Router::<()>::new().route("/json", post(|user: Json<User>| async move { "hello" }));
 ```
 
 License: MIT
