@@ -37,7 +37,8 @@
 //! ```
 mod json;
 mod query;
-pub mod rejection;
+mod rejection;
 
 pub use json::Json;
 pub use query::Query;
+pub use rejection::Rejection;
