@@ -45,16 +45,16 @@ where
     T: DeserializeOwned + serde_valid::Validate,
     S: Send + Sync,
 {
-    type Rejection = crate::rejection::Rejection;
+    type Rejection = crate::extract::rejection::QueryRejection;
 
     async fn from_request_parts(parts: &mut Parts, _state: &S) -> Result<Self, Self::Rejection> {
         let data: T = axum::extract::Query::from_request_parts(parts, _state)
             .await
-            .map_err(crate::rejection::Rejection::Query)?
+            .map_err(crate::extract::rejection::QueryRejection::Query)?
             .0;
 
         data.validate()
-            .map_err(crate::rejection::Rejection::SerdeValid)?;
+            .map_err(crate::extract::rejection::QueryRejection::SerdeValid)?;
 
         Ok(Query(data))
     }
