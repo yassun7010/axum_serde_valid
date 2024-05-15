@@ -35,10 +35,7 @@
 //!
 //! let app = Router::<()>::new().route("/json", post(|user: Json<User>| async move { "hello" }));
 //! ```
+pub mod extract;
 mod json;
-mod query;
-mod rejection;
 
 pub use json::Json;
-pub use query::Query;
-pub use rejection::Rejection;

@@ -44,16 +44,16 @@ where
     T: serde::de::DeserializeOwned + serde_valid::Validate + 'static,
     S: Send + Sync,
 {
-    type Rejection = crate::rejection::Rejection;
+    type Rejection = crate::extract::rejection::JsonRejection;
 
     async fn from_request(req: Request, state: &S) -> Result<Self, Self::Rejection> {
         let data: T = axum::Json::from_request(req, state)
             .await
-            .map_err(crate::rejection::Rejection::Json)?
+            .map_err(crate::extract::rejection::JsonRejection::Json)?
             .0;
 
         data.validate()
-            .map_err(crate::rejection::Rejection::SerdeValid)?;
+            .map_err(crate::extract::rejection::JsonRejection::SerdeValid)?;
 
         Ok(Json(data))
     }
