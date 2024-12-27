@@ -12,8 +12,8 @@ keywords = ["axum", "validation", "serde", "json_schema"]
 [dependencies]
 async-trait = "^0.1"
 axum = "^0.7"
-serde_valid = "^1.0.4"
 serde = "^1.0"
+serde_valid = "^1.0.4"
 
 [dev-dependencies]
 hyper = "^1.0"
