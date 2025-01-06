@@ -16,7 +16,7 @@ This crate works with Cargo and can be found on [crates.io](https://crates.io/cr
 ```toml
 [dependencies]
 axum = "^0.8"
-axum_serde_valid = "^1.0"
+axum_serde_valid = "^1.1"
 serde = "^1.0"
 serde_valid = "^1.0"
 ```

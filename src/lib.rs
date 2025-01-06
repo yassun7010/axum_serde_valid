@@ -13,8 +13,8 @@
 //!
 //! ```toml
 //! [dependencies]
-//! axum = "^0.6"
-//! axum_serde_valid = "^1.0"
+//! axum = "^0.8"
+//! axum_serde_valid = "^1.1"
 //! serde = "^1.0"
 //! serde_valid = "^1.0"
 //! ```
