@@ -13,10 +13,10 @@
 //!
 //! ```toml
 //! [dependencies]
-//! axum = "0.6"
-//! axum_serde_valid = "0.23.1"
+//! axum = "^0.6"
+//! axum_serde_valid = "^1.0"
 //! serde = "^1.0"
-//! serde_valid = "0.20"
+//! serde_valid = "^1.0"
 //! ```
 //!
 //! ## Example
