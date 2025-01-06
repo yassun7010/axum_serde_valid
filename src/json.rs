@@ -13,7 +13,6 @@
 //!
 //! - aide: support for [aide](https://docs.rs/aide/latest/aide/)
 
-use async_trait::async_trait;
 use axum::extract::Request;
 use axum::{extract::FromRequest, response::IntoResponse};
 use serde::Serialize;
@@ -38,7 +37,6 @@ impl<T> From<T> for Json<T> {
     }
 }
 
-#[async_trait]
 impl<T, S> FromRequest<S> for Json<T>
 where
     T: serde::de::DeserializeOwned + serde_valid::Validate + 'static,

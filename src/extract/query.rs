@@ -15,7 +15,6 @@
 
 use std::ops::Deref;
 
-use async_trait::async_trait;
 use axum::extract::FromRequestParts;
 use axum::http::request::Parts;
 use serde::de::DeserializeOwned;
@@ -39,7 +38,6 @@ impl<T> From<T> for Query<T> {
     }
 }
 
-#[async_trait]
 impl<T, S> FromRequestParts<S> for Query<T>
 where
     T: DeserializeOwned + serde_valid::Validate,

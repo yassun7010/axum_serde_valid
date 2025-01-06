@@ -10,17 +10,16 @@ keywords = ["axum", "validation", "serde", "json_schema"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [dependencies]
-async-trait = "^0.1"
-axum = "^0.7"
+axum = "^0.8"
 serde = "^1.0"
-serde_valid = "^1.0.4"
+serde_valid = "^1.0"
 
 [dev-dependencies]
 hyper = "^1.0"
 mime = "0.3"
 tokio = { version = "1.24", features = ["full"] }
 tower = { version = "0.4", features = ["util"] }
-serde_json = "^1.0"
+serde_json = { version = "^1.0" }
 
 [features]
 default = []
